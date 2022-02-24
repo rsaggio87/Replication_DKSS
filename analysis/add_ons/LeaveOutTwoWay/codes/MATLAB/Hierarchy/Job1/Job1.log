@@ -1,0 +1,1002 @@
+The scheduler has allocated the following nodes to this job: eml-sm[00-03]
+"/usr/local/linux/MATLAB/R2019a/bin/mw_mpiexec" -l -n 100 "/usr/local/linux/MATLAB/R2019a/bin/worker" -parallel
+[86] 
+[86]                             < M A T L A B (R) >
+[86]                   Copyright 1984-2019 The MathWorks, Inc.
+[86]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[86]                                March 8, 2019
+[86] 
+[98] 
+[98]                             < M A T L A B (R) >
+[98]                   Copyright 1984-2019 The MathWorks, Inc.
+[98]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[98]                                March 8, 2019
+[98] 
+[89] 
+[89]                             < M A T L A B (R) >
+[89]                   Copyright 1984-2019 The MathWorks, Inc.
+[89]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[89]                                March 8, 2019
+[89] 
+[92] 
+[92]                             < M A T L A B (R) >
+[92]                   Copyright 1984-2019 The MathWorks, Inc.
+[92]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[92]                                March 8, 2019
+[92] 
+[94] 
+[94]                             < M A T L A B (R) >
+[94]                   Copyright 1984-2019 The MathWorks, Inc.
+[94]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[94]                                March 8, 2019
+[94] 
+[96] 
+[96]                             < M A T L A B (R) >
+[96]                   Copyright 1984-2019 The MathWorks, Inc.
+[96]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[96]                                March 8, 2019
+[96] 
+[82] 
+[82]                             < M A T L A B (R) >
+[82]                   Copyright 1984-2019 The MathWorks, Inc.
+[82]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[82]                                March 8, 2019
+[82] 
+[84] 
+[84]                             < M A T L A B (R) >
+[84]                   Copyright 1984-2019 The MathWorks, Inc.
+[84]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[84]                                March 8, 2019
+[84] 
+[81] 
+[81]                             < M A T L A B (R) >
+[81]                   Copyright 1984-2019 The MathWorks, Inc.
+[81]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[81]                                March 8, 2019
+[81] 
+[90] 
+[90]                             < M A T L A B (R) >
+[90]                   Copyright 1984-2019 The MathWorks, Inc.
+[90]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[90]                                March 8, 2019
+[90] 
+[99] 
+[99]                             < M A T L A B (R) >
+[99]                   Copyright 1984-2019 The MathWorks, Inc.
+[99]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[99]                                March 8, 2019
+[99] 
+[87] 
+[87]                             < M A T L A B (R) >
+[87]                   Copyright 1984-2019 The MathWorks, Inc.
+[87]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[87]                                March 8, 2019
+[87] 
+[69] 
+[69]                             < M A T L A B (R) >
+[69]                   Copyright 1984-2019 The MathWorks, Inc.
+[69]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[69]                                March 8, 2019
+[69] 
+[83] 
+[83]                             < M A T L A B (R) >
+[83]                   Copyright 1984-2019 The MathWorks, Inc.
+[83]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[83]                                March 8, 2019
+[83] 
+[93] 
+[93]                             < M A T L A B (R) >
+[93]                   Copyright 1984-2019 The MathWorks, Inc.
+[93]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[93]                                March 8, 2019
+[93] 
+[75] 
+[75]                             < M A T L A B (R) >
+[75]                   Copyright 1984-2019 The MathWorks, Inc.
+[75]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[75]                                March 8, 2019
+[75] 
+[85] 
+[85]                             < M A T L A B (R) >
+[85]                   Copyright 1984-2019 The MathWorks, Inc.
+[85]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[85]                                March 8, 2019
+[85] 
+[71] 
+[71]                             < M A T L A B (R) >
+[71]                   Copyright 1984-2019 The MathWorks, Inc.
+[71]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[71]                                March 8, 2019
+[71] 
+[97] 
+[97]                             < M A T L A B (R) >
+[97]                   Copyright 1984-2019 The MathWorks, Inc.
+[97]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[97]                                March 8, 2019
+[97] 
+[78] 
+[78]                             < M A T L A B (R) >
+[78]                   Copyright 1984-2019 The MathWorks, Inc.
+[78]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[78]                                March 8, 2019
+[78] 
+[74] 
+[74]                             < M A T L A B (R) >
+[74]                   Copyright 1984-2019 The MathWorks, Inc.
+[74]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[74]                                March 8, 2019
+[74] 
+[68] 
+[68]                             < M A T L A B (R) >
+[68]                   Copyright 1984-2019 The MathWorks, Inc.
+[68]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[68]                                March 8, 2019
+[68] 
+[77] 
+[77]                             < M A T L A B (R) >
+[77]                   Copyright 1984-2019 The MathWorks, Inc.
+[77]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[77]                                March 8, 2019
+[77] 
+[76] 
+[76]                             < M A T L A B (R) >
+[76]                   Copyright 1984-2019 The MathWorks, Inc.
+[76]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[76]                                March 8, 2019
+[76] 
+[95] 
+[95]                             < M A T L A B (R) >
+[95]                   Copyright 1984-2019 The MathWorks, Inc.
+[95]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[95]                                March 8, 2019
+[95] 
+[88] 
+[88]                             < M A T L A B (R) >
+[88]                   Copyright 1984-2019 The MathWorks, Inc.
+[88]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[88]                                March 8, 2019
+[88] 
+[73] 
+[73]                             < M A T L A B (R) >
+[73]                   Copyright 1984-2019 The MathWorks, Inc.
+[73]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[73]                                March 8, 2019
+[73] 
+[91] 
+[91]                             < M A T L A B (R) >
+[91]                   Copyright 1984-2019 The MathWorks, Inc.
+[91]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[91]                                March 8, 2019
+[91] 
+[80] 
+[80]                             < M A T L A B (R) >
+[80]                   Copyright 1984-2019 The MathWorks, Inc.
+[80]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[80]                                March 8, 2019
+[80] 
+[70] 
+[70]                             < M A T L A B (R) >
+[70]                   Copyright 1984-2019 The MathWorks, Inc.
+[70]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[70]                                March 8, 2019
+[70] 
+[79] 
+[79]                             < M A T L A B (R) >
+[79]                   Copyright 1984-2019 The MathWorks, Inc.
+[79]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[79]                                March 8, 2019
+[79] 
+[72] 
+[72]                             < M A T L A B (R) >
+[72]                   Copyright 1984-2019 The MathWorks, Inc.
+[72]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[72]                                March 8, 2019
+[72] 
+[86]  
+[69]  
+[86] To get started, type doc.
+[86] For product information, visit www.mathworks.com.
+[86]  
+[89]  
+[69] To get started, type doc.
+[69] For product information, visit www.mathworks.com.
+[69]  
+[89] To get started, type doc.
+[89] For product information, visit www.mathworks.com.
+[89]  
+[98]  
+[77]  
+[90]  
+[83]  
+[98] To get started, type doc.
+[98] For product information, visit www.mathworks.com.
+[98]  
+[68]  
+[74]  
+[97]  
+[95]  
+[91]  
+[90] To get started, type doc.
+[90] For product information, visit www.mathworks.com.
+[90]  
+[77] To get started, type doc.
+[77] For product information, visit www.mathworks.com.
+[77]  
+[80]  
+[83] To get started, type doc.
+[83] For product information, visit www.mathworks.com.
+[83]  
+[70]  
+[94]  
+[92]  
+[96]  
+[73]  
+[71]  
+[84]  
+[99]  
+[93]  
+[81]  
+[68] To get started, type doc.
+[68] For product information, visit www.mathworks.com.
+[68]  
+[95] To get started, type doc.
+[95] For product information, visit www.mathworks.com.
+[95]  
+[97] To get started, type doc.
+[97] For product information, visit www.mathworks.com.
+[97]  
+[91] To get started, type doc.
+[91] For product information, visit www.mathworks.com.
+[91]  
+[74] To get started, type doc.
+[74] For product information, visit www.mathworks.com.
+[74]  
+[80] To get started, type doc.
+[80] For product information, visit www.mathworks.com.
+[80]  
+[75]  
+[70] To get started, type doc.
+[70] For product information, visit www.mathworks.com.
+[70]  
+[79]  
+[94] To get started, type doc.
+[78]  
+[94] For product information, visit www.mathworks.com.
+[94]  
+[71] To get started, type doc.
+[71] For product information, visit www.mathworks.com.
+[71]  
+[73] To get started, type doc.
+[73] For product information, visit www.mathworks.com.
+[73]  
+[96] To get started, type doc.
+[96] For product information, visit www.mathworks.com.
+[96]  
+[82]  
+[99] To get started, type doc.
+[99] For product information, visit www.mathworks.com.
+[99]  
+[87]  
+[88]  
+[93] To get started, type doc.
+[93] For product information, visit www.mathworks.com.
+[93]  
+[84] To get started, type doc.
+[84] For product information, visit www.mathworks.com.
+[84]  
+[92] To get started, type doc.
+[92] For product information, visit www.mathworks.com.
+[92]  
+[81] To get started, type doc.
+[81] For product information, visit www.mathworks.com.
+[81]  
+[76]  
+[72]  
+[75] To get started, type doc.
+[75] For product information, visit www.mathworks.com.
+[75]  
+[85]  
+[79] To get started, type doc.
+[79] For product information, visit www.mathworks.com.
+[79]  
+[78] To get started, type doc.
+[78] For product information, visit www.mathworks.com.
+[78]  
+[82] To get started, type doc.
+[82] For product information, visit www.mathworks.com.
+[82]  
+[88] To get started, type doc.
+[88] For product information, visit www.mathworks.com.
+[88]  
+[87] To get started, type doc.
+[87] For product information, visit www.mathworks.com.
+[87]  
+[85] To get started, type doc.
+[85] For product information, visit www.mathworks.com.
+[85]  
+[76] To get started, type doc.
+[76] For product information, visit www.mathworks.com.
+[76]  
+[72] To get started, type doc.
+[72] For product information, visit www.mathworks.com.
+[72]  
+[7] 
+[7]                             < M A T L A B (R) >
+[7]                   Copyright 1984-2019 The MathWorks, Inc.
+[7]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[7]                                March 8, 2019
+[7] 
+[10] 
+[10]                             < M A T L A B (R) >
+[10]                   Copyright 1984-2019 The MathWorks, Inc.
+[10]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[10]                                March 8, 2019
+[10] 
+[11] 
+[11]                             < M A T L A B (R) >
+[11]                   Copyright 1984-2019 The MathWorks, Inc.
+[11]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[11]                                March 8, 2019
+[11] 
+[15] 
+[15]                             < M A T L A B (R) >
+[15]                   Copyright 1984-2019 The MathWorks, Inc.
+[15]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[15]                                March 8, 2019
+[15] 
+[21] 
+[21]                             < M A T L A B (R) >
+[21]                   Copyright 1984-2019 The MathWorks, Inc.
+[21]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[21]                                March 8, 2019
+[21] 
+[28] 
+[28]                             < M A T L A B (R) >
+[28]                   Copyright 1984-2019 The MathWorks, Inc.
+[28]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[28]                                March 8, 2019
+[28] 
+[9] 
+[9]                             < M A T L A B (R) >
+[9]                   Copyright 1984-2019 The MathWorks, Inc.
+[9]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[9]                                March 8, 2019
+[9] 
+[29] 
+[29]                             < M A T L A B (R) >
+[29]                   Copyright 1984-2019 The MathWorks, Inc.
+[29]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[29]                                March 8, 2019
+[29] 
+[8] 
+[8]                             < M A T L A B (R) >
+[8]                   Copyright 1984-2019 The MathWorks, Inc.
+[8]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[8]                                March 8, 2019
+[8] 
+[6] 
+[6]                             < M A T L A B (R) >
+[6]                   Copyright 1984-2019 The MathWorks, Inc.
+[6]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[6]                                March 8, 2019
+[6] 
+[19] 
+[19]                             < M A T L A B (R) >
+[19]                   Copyright 1984-2019 The MathWorks, Inc.
+[19]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[19]                                March 8, 2019
+[19] 
+[35] 
+[35]                             < M A T L A B (R) >
+[35]                   Copyright 1984-2019 The MathWorks, Inc.
+[35]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[35]                                March 8, 2019
+[35] 
+[13] 
+[13]                             < M A T L A B (R) >
+[13]                   Copyright 1984-2019 The MathWorks, Inc.
+[13]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[13]                                March 8, 2019
+[13] 
+[16] 
+[16]                             < M A T L A B (R) >
+[16]                   Copyright 1984-2019 The MathWorks, Inc.
+[16]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[16]                                March 8, 2019
+[16] 
+[32] 
+[32]                             < M A T L A B (R) >
+[32]                   Copyright 1984-2019 The MathWorks, Inc.
+[32]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[32]                                March 8, 2019
+[32] 
+[14] 
+[14]                             < M A T L A B (R) >
+[14]                   Copyright 1984-2019 The MathWorks, Inc.
+[14]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[14]                                March 8, 2019
+[14] 
+[23] 
+[23]                             < M A T L A B (R) >
+[23]                   Copyright 1984-2019 The MathWorks, Inc.
+[23]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[23]                                March 8, 2019
+[23] 
+[31] 
+[31]                             < M A T L A B (R) >
+[31]                   Copyright 1984-2019 The MathWorks, Inc.
+[31]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[31]                                March 8, 2019
+[31] 
+[22] 
+[22]                             < M A T L A B (R) >
+[22]                   Copyright 1984-2019 The MathWorks, Inc.
+[22]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[22]                                March 8, 2019
+[22] 
+[27] 
+[27]                             < M A T L A B (R) >
+[27]                   Copyright 1984-2019 The MathWorks, Inc.
+[27]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[27]                                March 8, 2019
+[27] 
+[30] 
+[30]                             < M A T L A B (R) >
+[30]                   Copyright 1984-2019 The MathWorks, Inc.
+[30]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[30]                                March 8, 2019
+[30] 
+[4] 
+[4]                             < M A T L A B (R) >
+[4]                   Copyright 1984-2019 The MathWorks, Inc.
+[4]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[4]                                March 8, 2019
+[4] 
+[25] 
+[25]                             < M A T L A B (R) >
+[25]                   Copyright 1984-2019 The MathWorks, Inc.
+[25]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[25]                                March 8, 2019
+[25] 
+[26] 
+[26]                             < M A T L A B (R) >
+[26]                   Copyright 1984-2019 The MathWorks, Inc.
+[26]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[26]                                March 8, 2019
+[26] 
+[24] 
+[24]                             < M A T L A B (R) >
+[24]                   Copyright 1984-2019 The MathWorks, Inc.
+[24]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[24]                                March 8, 2019
+[24] 
+[18] 
+[18]                             < M A T L A B (R) >
+[18]                   Copyright 1984-2019 The MathWorks, Inc.
+[18]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[18]                                March 8, 2019
+[18] 
+[17] 
+[17]                             < M A T L A B (R) >
+[17]                   Copyright 1984-2019 The MathWorks, Inc.
+[17]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[17]                                March 8, 2019
+[17] 
+[33] 
+[33]                             < M A T L A B (R) >
+[33]                   Copyright 1984-2019 The MathWorks, Inc.
+[33]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[33]                                March 8, 2019
+[33] 
+[34] 
+[34]                             < M A T L A B (R) >
+[34]                   Copyright 1984-2019 The MathWorks, Inc.
+[34]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[34]                                March 8, 2019
+[34] 
+[20] 
+[20]                             < M A T L A B (R) >
+[20]                   Copyright 1984-2019 The MathWorks, Inc.
+[20]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[20]                                March 8, 2019
+[20] 
+[12] 
+[12]                             < M A T L A B (R) >
+[12]                   Copyright 1984-2019 The MathWorks, Inc.
+[12]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[12]                                March 8, 2019
+[12] 
+[5] 
+[5]                             < M A T L A B (R) >
+[5]                   Copyright 1984-2019 The MathWorks, Inc.
+[5]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[5]                                March 8, 2019
+[5] 
+[21]  
+[16]  
+[33]  
+[12]  
+[29]  
+[13]  
+[30]  
+[34]  
+[19]  
+[25]  
+[14]  
+[20]  
+[32]  
+[22]  
+[9]  
+[17]  
+[4]  
+[27]  
+[31]  
+[7]  
+[11]  
+[5]  
+[23]  
+[15]  
+[8]  
+[24]  
+[35]  
+[16] To get started, type doc.
+[25] To get started, type doc.
+[16] For product information, visit www.mathworks.com.
+[16]  
+[25] For product information, visit www.mathworks.com.
+[25]  
+[32] To get started, type doc.
+[29] To get started, type doc.
+[12] To get started, type doc.
+[13] To get started, type doc.
+[21] To get started, type doc.
+[30] To get started, type doc.
+[33] To get started, type doc.
+[14] To get started, type doc.
+[34] To get started, type doc.
+[19] To get started, type doc.
+[32] For product information, visit www.mathworks.com.
+[29] For product information, visit www.mathworks.com.
+[32]  
+[21] For product information, visit www.mathworks.com.
+[29]  
+[33] For product information, visit www.mathworks.com.
+[33]  
+[12] For product information, visit www.mathworks.com.
+[12]  
+[13] For product information, visit www.mathworks.com.
+[13]  
+[20] To get started, type doc.
+[21]  
+[30] For product information, visit www.mathworks.com.
+[30]  
+[14] For product information, visit www.mathworks.com.
+[34] For product information, visit www.mathworks.com.
+[14]  
+[34]  
+[19] For product information, visit www.mathworks.com.
+[6]  
+[19]  
+[20] For product information, visit www.mathworks.com.
+[20]  
+[28]  
+[18]  
+[4] To get started, type doc.
+[4] For product information, visit www.mathworks.com.
+[4]  
+[17] To get started, type doc.
+[9] To get started, type doc.
+[15] To get started, type doc.
+[22] To get started, type doc.
+[7] To get started, type doc.
+[5] To get started, type doc.
+[17] For product information, visit www.mathworks.com.
+[17]  
+[15] For product information, visit www.mathworks.com.
+[15]  
+[9] For product information, visit www.mathworks.com.
+[22] For product information, visit www.mathworks.com.
+[9]  
+[22]  
+[24] To get started, type doc.
+[7] For product information, visit www.mathworks.com.
+[7]  
+[11] To get started, type doc.
+[23] To get started, type doc.
+[5] For product information, visit www.mathworks.com.
+[5]  
+[27] To get started, type doc.
+[24] For product information, visit www.mathworks.com.
+[24]  
+[31] To get started, type doc.
+[11] For product information, visit www.mathworks.com.
+[23] For product information, visit www.mathworks.com.
+[11]  
+[23]  
+[27] For product information, visit www.mathworks.com.
+[27]  
+[31] For product information, visit www.mathworks.com.
+[8] To get started, type doc.
+[31]  
+[8] For product information, visit www.mathworks.com.
+[8]  
+[10]  
+[35] To get started, type doc.
+[35] For product information, visit www.mathworks.com.
+[35]  
+[26]  
+[6] To get started, type doc.
+[28] To get started, type doc.
+[18] To get started, type doc.
+[6] For product information, visit www.mathworks.com.
+[6]  
+[28] For product information, visit www.mathworks.com.
+[28]  
+[18] For product information, visit www.mathworks.com.
+[18]  
+[10] To get started, type doc.
+[10] For product information, visit www.mathworks.com.
+[10]  
+[26] To get started, type doc.
+[26] For product information, visit www.mathworks.com.
+[26]  
+[3] 
+[3]                             < M A T L A B (R) >
+[3]                   Copyright 1984-2019 The MathWorks, Inc.
+[3]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[3]                                March 8, 2019
+[3] 
+[2] 
+[2]                             < M A T L A B (R) >
+[2]                   Copyright 1984-2019 The MathWorks, Inc.
+[2]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[2]                                March 8, 2019
+[2] 
+[0] 
+[0]                             < M A T L A B (R) >
+[0]                   Copyright 1984-2019 The MathWorks, Inc.
+[0]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[0]                                March 8, 2019
+[0] 
+[1] 
+[1]                             < M A T L A B (R) >
+[1]                   Copyright 1984-2019 The MathWorks, Inc.
+[1]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[1]                                March 8, 2019
+[1] 
+[1]  
+[3]  
+[0]  
+[2]  
+[0] To get started, type doc.
+[3] To get started, type doc.
+[3] For product information, visit www.mathworks.com.
+[3]  
+[2] To get started, type doc.
+[2] For product information, visit www.mathworks.com.
+[2]  
+[1] To get started, type doc.
+[1] For product information, visit www.mathworks.com.
+[0] For product information, visit www.mathworks.com.
+[0]  
+[1]  
+[64] 
+[64]                             < M A T L A B (R) >
+[64]                   Copyright 1984-2019 The MathWorks, Inc.
+[64]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[64]                                March 8, 2019
+[64] 
+[37] 
+[37]                             < M A T L A B (R) >
+[37]                   Copyright 1984-2019 The MathWorks, Inc.
+[37]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[37]                                March 8, 2019
+[37] 
+[55] 
+[55]                             < M A T L A B (R) >
+[55]                   Copyright 1984-2019 The MathWorks, Inc.
+[55]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[55]                                March 8, 2019
+[55] 
+[39] 
+[39]                             < M A T L A B (R) >
+[39]                   Copyright 1984-2019 The MathWorks, Inc.
+[39]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[39]                                March 8, 2019
+[39] 
+[52] 
+[52]                             < M A T L A B (R) >
+[52]                   Copyright 1984-2019 The MathWorks, Inc.
+[52]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[52]                                March 8, 2019
+[52] 
+[60] 
+[60]                             < M A T L A B (R) >
+[60]                   Copyright 1984-2019 The MathWorks, Inc.
+[60]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[60]                                March 8, 2019
+[60] 
+[40] 
+[40]                             < M A T L A B (R) >
+[40]                   Copyright 1984-2019 The MathWorks, Inc.
+[40]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[40]                                March 8, 2019
+[40] 
+[41] 
+[41]                             < M A T L A B (R) >
+[41]                   Copyright 1984-2019 The MathWorks, Inc.
+[41]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[41]                                March 8, 2019
+[41] 
+[48] 
+[48]                             < M A T L A B (R) >
+[48]                   Copyright 1984-2019 The MathWorks, Inc.
+[48]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[48]                                March 8, 2019
+[48] 
+[43] 
+[43]                             < M A T L A B (R) >
+[43]                   Copyright 1984-2019 The MathWorks, Inc.
+[43]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[43]                                March 8, 2019
+[43] 
+[63] 
+[63]                             < M A T L A B (R) >
+[63]                   Copyright 1984-2019 The MathWorks, Inc.
+[63]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[63]                                March 8, 2019
+[63] 
+[58] 
+[58]                             < M A T L A B (R) >
+[58]                   Copyright 1984-2019 The MathWorks, Inc.
+[58]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[58]                                March 8, 2019
+[58] 
+[53] 
+[53]                             < M A T L A B (R) >
+[53]                   Copyright 1984-2019 The MathWorks, Inc.
+[53]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[53]                                March 8, 2019
+[53] 
+[62] 
+[62]                             < M A T L A B (R) >
+[62]                   Copyright 1984-2019 The MathWorks, Inc.
+[62]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[62]                                March 8, 2019
+[62] 
+[65] 
+[65]                             < M A T L A B (R) >
+[65]                   Copyright 1984-2019 The MathWorks, Inc.
+[65]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[65]                                March 8, 2019
+[65] 
+[54] 
+[54]                             < M A T L A B (R) >
+[54]                   Copyright 1984-2019 The MathWorks, Inc.
+[54]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[54]                                March 8, 2019
+[54] 
+[38] 
+[38]                             < M A T L A B (R) >
+[38]                   Copyright 1984-2019 The MathWorks, Inc.
+[38]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[38]                                March 8, 2019
+[38] 
+[36] 
+[36]                             < M A T L A B (R) >
+[36]                   Copyright 1984-2019 The MathWorks, Inc.
+[36]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[36]                                March 8, 2019
+[36] 
+[57] 
+[57]                             < M A T L A B (R) >
+[57]                   Copyright 1984-2019 The MathWorks, Inc.
+[57]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[57]                                March 8, 2019
+[57] 
+[42] 
+[42]                             < M A T L A B (R) >
+[42]                   Copyright 1984-2019 The MathWorks, Inc.
+[42]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[42]                                March 8, 2019
+[42] 
+[49] 
+[49]                             < M A T L A B (R) >
+[49]                   Copyright 1984-2019 The MathWorks, Inc.
+[49]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[49]                                March 8, 2019
+[49] 
+[50] 
+[50]                             < M A T L A B (R) >
+[50]                   Copyright 1984-2019 The MathWorks, Inc.
+[50]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[50]                                March 8, 2019
+[50] 
+[45] 
+[45]                             < M A T L A B (R) >
+[45]                   Copyright 1984-2019 The MathWorks, Inc.
+[45]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[45]                                March 8, 2019
+[45] 
+[51] 
+[51]                             < M A T L A B (R) >
+[51]                   Copyright 1984-2019 The MathWorks, Inc.
+[51]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[51]                                March 8, 2019
+[51] 
+[59] 
+[59]                             < M A T L A B (R) >
+[59]                   Copyright 1984-2019 The MathWorks, Inc.
+[59]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[59]                                March 8, 2019
+[59] 
+[47] 
+[47]                             < M A T L A B (R) >
+[47]                   Copyright 1984-2019 The MathWorks, Inc.
+[47]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[47]                                March 8, 2019
+[47] 
+[44] 
+[44]                             < M A T L A B (R) >
+[44]                   Copyright 1984-2019 The MathWorks, Inc.
+[44]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[44]                                March 8, 2019
+[44] 
+[46] 
+[46]                             < M A T L A B (R) >
+[46]                   Copyright 1984-2019 The MathWorks, Inc.
+[46]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[46]                                March 8, 2019
+[46] 
+[61] 
+[61]                             < M A T L A B (R) >
+[61]                   Copyright 1984-2019 The MathWorks, Inc.
+[61]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[61]                                March 8, 2019
+[61] 
+[67] 
+[67]                             < M A T L A B (R) >
+[67]                   Copyright 1984-2019 The MathWorks, Inc.
+[67]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[67]                                March 8, 2019
+[67] 
+[56] 
+[56]                             < M A T L A B (R) >
+[56]                   Copyright 1984-2019 The MathWorks, Inc.
+[56]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[56]                                March 8, 2019
+[56] 
+[66] 
+[66]                             < M A T L A B (R) >
+[66]                   Copyright 1984-2019 The MathWorks, Inc.
+[66]                   R2019a (9.6.0.1072779) 64-bit (glnxa64)
+[66]                                March 8, 2019
+[66] 
+[58]  
+[65]  
+[46]  
+[62]  
+[51]  
+[48]  
+[50]  
+[55]  
+[47]  
+[60]  
+[67]  
+[44]  
+[41]  
+[57]  
+[49]  
+[36]  
+[38]  
+[63]  
+[59]  
+[43]  
+[42]  
+[66]  
+[40]  
+[64]  
+[45]  
+[37]  
+[61]  
+[54]  
+[56]  
+[53]  
+[39]  
+[52]  
+[41] To get started, type doc.
+[55] To get started, type doc.
+[46] To get started, type doc.
+[50] To get started, type doc.
+[47] To get started, type doc.
+[48] To get started, type doc.
+[49] To get started, type doc.
+[55] For product information, visit www.mathworks.com.
+[55]  
+[58] To get started, type doc.
+[41] For product information, visit www.mathworks.com.
+[42] To get started, type doc.
+[62] To get started, type doc.
+[41]  
+[67] To get started, type doc.
+[44] To get started, type doc.
+[59] To get started, type doc.
+[63] To get started, type doc.
+[50] For product information, visit www.mathworks.com.
+[47] For product information, visit www.mathworks.com.
+[46] For product information, visit www.mathworks.com.
+[47]  
+[50]  
+[46]  
+[58] For product information, visit www.mathworks.com.
+[48] For product information, visit www.mathworks.com.
+[49] For product information, visit www.mathworks.com.
+[48]  
+[58]  
+[42] For product information, visit www.mathworks.com.
+[49]  
+[62] For product information, visit www.mathworks.com.
+[62]  
+[42]  
+[44] For product information, visit www.mathworks.com.
+[63] For product information, visit www.mathworks.com.
+[67] For product information, visit www.mathworks.com.
+[67]  
+[44]  
+[63]  
+[59] For product information, visit www.mathworks.com.
+[59]  
+[36] To get started, type doc.
+[51] To get started, type doc.
+[36] For product information, visit www.mathworks.com.
+[36]  
+[60] To get started, type doc.
+[66] To get started, type doc.
+[51] For product information, visit www.mathworks.com.
+[51]  
+[57] To get started, type doc.
+[43] To get started, type doc.
+[60] For product information, visit www.mathworks.com.
+[65] To get started, type doc.
+[60]  
+[66] For product information, visit www.mathworks.com.
+[66]  
+[38] To get started, type doc.
+[57] For product information, visit www.mathworks.com.
+[57]  
+[43] For product information, visit www.mathworks.com.
+[43]  
+[65] For product information, visit www.mathworks.com.
+[65]  
+[38] For product information, visit www.mathworks.com.
+[38]  
+[53] To get started, type doc.
+[54] To get started, type doc.
+[61] To get started, type doc.
+[56] To get started, type doc.
+[64] To get started, type doc.
+[39] To get started, type doc.
+[53] For product information, visit www.mathworks.com.
+[53]  
+[54] For product information, visit www.mathworks.com.
+[54]  
+[56] For product information, visit www.mathworks.com.
+[56]  
+[61] For product information, visit www.mathworks.com.
+[61]  
+[37] To get started, type doc.
+[64] For product information, visit www.mathworks.com.
+[64]  
+[40] To get started, type doc.
+[52] To get started, type doc.
+[39] For product information, visit www.mathworks.com.
+[39]  
+[37] For product information, visit www.mathworks.com.
+[37]  
+[40] For product information, visit www.mathworks.com.
+[40]  
+[52] For product information, visit www.mathworks.com.
+[52]  
+[45] To get started, type doc.
+[45] For product information, visit www.mathworks.com.
+[45]  

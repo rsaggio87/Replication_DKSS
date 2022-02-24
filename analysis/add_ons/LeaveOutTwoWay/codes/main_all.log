@@ -1,0 +1,394 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018a (9.4.0.813654) 64-bit (glnxa64)
+                             February 23, 2018
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> Starting parallel pool (parpool) using the 'local' profile ...
+connected to 32 workers.
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> 
+ans =
+
+     0
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Listing options
+
+n_of_parameters =
+
+     1
+
+
+leave_out_level =
+
+    'obs'
+
+
+no_controls =
+
+     1
+
+
+resid_controls =
+
+     0
+
+
+andrews_estimates =
+
+     0
+
+
+eigen_diagno =
+
+     0
+
+
+subsample_llr_fit =
+
+     0
+
+
+restrict_movers =
+
+     0
+
+
+do_SE =
+
+     0
+
+
+filename =
+
+    'Rovigo_1997_2001'
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Original Dataset:
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# of p-y obs: 186916
+# of workers: 58580
+# of firms: 7828
+mean wage: 4.5755
+variance of wage: 0.16492
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Finding connected set...
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# of firms: 7828
+# connected sets:2749
+Largest connected set contains 4742 firms
+Running AKM...
+Elapsed time is 0.005297 seconds.
+pcg converged at iteration 112 to a solution with relative residual 8.4e-11.
+Elapsed time is 0.605264 seconds.
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+STEP 1: AKM Estimates on Largest Connected Set 
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+mean wage: 4.5888
+variance of wage: 0.15913
+# of Movers: 12064
+# of Firms: 4742
+# of Person Year Observations: 166910
+-*-*-*-*-*-*AKM RESULTS-*-*-*-*-*-*
+Variance of Firm Effects: 0.067613
+Covariance of Firm and Person Effects: -0.0040807
+Variance of Person Effects: 0.089908
+Correlation of Firm Effect and Person Effects: -0.052339
+R2: 0.93861
+Adj.R2: 0.90723
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Finding the leave one out largest connected set... 
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Number of workers that when dropped would disconnect the graph: 1635
+Number of workers that when dropped would disconnect the graph: 100
+Number of workers that when dropped would disconnect the graph: 5
+Number of workers that when dropped would disconnect the graph: 0
+Time to find leave one out largest connected set
+Elapsed time is 0.441382 seconds.
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Info on the leave one out connected set:
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+mean wage: 4.5933
+variance of wage: 0.15944
+# of Movers: 10127
+# of Firms: 2869
+# of Person Year Observations: 145942
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+checking, must report 1
+
+ans =
+
+     1
+
+Calculating Leave Out Matrices...
+Time to compute Leave one out matrices
+Elapsed time is 834.802120 seconds.
+Saving (Bii,Pii)
+Running AKM...
+pcg converged at iteration 89 to a solution with relative residual 8.3e-11.
+{Error using ichol
+Encountered nonpositive pivot.
+
+Error in leave_out_COMPLETE (line 696)
+L_P=ichol(I_Lambda_P,struct('type','ict','droptol',1e-2,'diagcomp',2));
+} 
+>> 
+ans =
+
+     0
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Listing options
+
+n_of_parameters =
+
+     1
+
+
+leave_out_level =
+
+    'matches'
+
+
+no_controls =
+
+     1
+
+
+resid_controls =
+
+     0
+
+
+andrews_estimates =
+
+     0
+
+
+eigen_diagno =
+
+     0
+
+
+subsample_llr_fit =
+
+     0
+
+
+restrict_movers =
+
+     0
+
+
+do_SE =
+
+     0
+
+
+filename =
+
+    'Rovigo_1997_2001'
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Original Dataset:
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# of p-y obs: 186916
+# of workers: 58580
+# of firms: 7828
+mean wage: 4.5755
+variance of wage: 0.16492
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Finding connected set...
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# of firms: 7828
+# connected sets:2749
+Largest connected set contains 4742 firms
+Running AKM...
+Elapsed time is 0.005542 seconds.
+pcg converged at iteration 112 to a solution with relative residual 8.4e-11.
+Elapsed time is 0.315463 seconds.
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+STEP 1: AKM Estimates on Largest Connected Set 
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+mean wage: 4.5888
+variance of wage: 0.15913
+# of Movers: 12064
+# of Firms: 4742
+# of Person Year Observations: 166910
+-*-*-*-*-*-*AKM RESULTS-*-*-*-*-*-*
+Variance of Firm Effects: 0.067613
+Covariance of Firm and Person Effects: -0.0040807
+Variance of Person Effects: 0.089908
+Correlation of Firm Effect and Person Effects: -0.052339
+R2: 0.93861
+Adj.R2: 0.90723
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Finding the leave one out largest connected set... 
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Number of workers that when dropped would disconnect the graph: 1635
+Number of workers that when dropped would disconnect the graph: 100
+Number of workers that when dropped would disconnect the graph: 5
+Number of workers that when dropped would disconnect the graph: 0
+Time to find leave one out largest connected set
+Elapsed time is 0.393159 seconds.
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Info on the leave one out connected set:
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+mean wage: 4.5933
+variance of wage: 0.15944
+# of Movers: 10127
+# of Firms: 2869
+# of Person Year Observations: 145942
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+checking, must report 1
+
+ans =
+
+     1
+
+Calculating Leave Out Matrices...
+Time to compute Leave one out matrices
+Elapsed time is 3360.556151 seconds.
+Saving (Bii,Pii)
+Running AKM...
+pcg converged at iteration 89 to a solution with relative residual 8.3e-11.
+{Error using ichol
+Encountered nonpositive pivot.
+
+Error in leave_out_COMPLETE (line 696)
+L_P=ichol(I_Lambda_P,struct('type','ict','droptol',1e-2,'diagcomp',2));
+} 
+>> 
+ans =
+
+     0
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Listing options
+
+n_of_parameters =
+
+     1
+
+
+leave_out_level =
+
+    'workers'
+
+
+no_controls =
+
+     1
+
+
+resid_controls =
+
+     0
+
+
+andrews_estimates =
+
+     0
+
+
+eigen_diagno =
+
+     0
+
+
+subsample_llr_fit =
+
+     0
+
+
+restrict_movers =
+
+     0
+
+
+do_SE =
+
+     0
+
+
+filename =
+
+    'Rovigo_1997_2001'
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Original Dataset:
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# of p-y obs: 186916
+# of workers: 58580
+# of firms: 7828
+mean wage: 4.5755
+variance of wage: 0.16492
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Finding connected set...
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+# of firms: 7828
+# connected sets:2749
+Largest connected set contains 4742 firms
+Running AKM...
+Elapsed time is 0.005422 seconds.
+pcg converged at iteration 112 to a solution with relative residual 8.4e-11.
+Elapsed time is 0.329549 seconds.
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+STEP 1: AKM Estimates on Largest Connected Set 
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+mean wage: 4.5888
+variance of wage: 0.15913
+# of Movers: 12064
+# of Firms: 4742
+# of Person Year Observations: 166910
+-*-*-*-*-*-*AKM RESULTS-*-*-*-*-*-*
+Variance of Firm Effects: 0.067613
+Covariance of Firm and Person Effects: -0.0040807
+Variance of Person Effects: 0.089908
+Correlation of Firm Effect and Person Effects: -0.052339
+R2: 0.93861
+Adj.R2: 0.90723
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Finding the leave one out largest connected set... 
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Number of workers that when dropped would disconnect the graph: 1635
+Number of workers that when dropped would disconnect the graph: 100
+Number of workers that when dropped would disconnect the graph: 5
+Number of workers that when dropped would disconnect the graph: 0
+Time to find leave one out largest connected set
+Elapsed time is 0.287286 seconds.
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Info on the leave one out connected set:
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+mean wage: 4.5933
+variance of wage: 0.15944
+# of Movers: 10127
+# of Firms: 2869
+# of Person Year Observations: 145942
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+checking, must report 1
+
+ans =
+
+     1
+
+Calculating Leave Out Matrices...
+Time to compute Leave one out matrices
+Elapsed time is 4082.413917 seconds.
+Saving (Bii,Pii)
+Running AKM...
+pcg converged at iteration 89 to a solution with relative residual 8.3e-11.
+{Error using ichol
+Encountered nonpositive pivot.
+
+Error in leave_out_COMPLETE (line 696)
+L_P=ichol(I_Lambda_P,struct('type','ict','droptol',1e-2,'diagcomp',2));
+} 
+>> >> >> >> >> >> >> 

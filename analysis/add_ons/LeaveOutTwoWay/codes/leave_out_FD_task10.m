@@ -1,0 +1,841 @@
+function [sigma2_psi,V] = leave_out_FD_task1(y,id,firmid,leave_out_level,controls,type_algorithm,eigen_diagno,eigen_fast,do_montecarlo,restrict_movers,filename)
+%% Author: Raffaele Saggio
+%Email: raffaele.saggio@berkeley.edu
+
+%% Version:
+% 1.0: Wrote documentation. 06.15.2018.
+
+% 2.0: New version:
+%                    - Fixed bug when pcg stagnates when performing JL algorithm.
+%                    - Rewrote documentation. 
+%                    - Standard errors now account for serial correlation
+%                      of the error term within worker.
+
+
+%% DESCRIPTION
+%This function computes the leave out estimates of the variance
+%of firm effects in two-way fixed effects model as described in KSS.
+
+%This functions permits computation of the leave-out variance of firm 
+%effects by partialling out the worker effects
+%and working with the model in first differences (or in stacked First
+%Differences when T>2, see below).
+
+%This code also permits computation of the variance of firm effects that
+%remains unbiased in the presence of serial correlation in the error term
+%within each worker (leave_out_level='workers').
+
+%When working with large dataset it is highly recommended to set the option
+%type_algorithm='JL', in order to apply the randomized algorithm routine 
+%described in Appendix B of KSS. 
+%Also, the user should set the option eigen_fast=1 in order to speed up 
+%calculations of the eigenvalues and eigevectors.
+
+%When the input data set has max(T_i)=2, where T_i is the total number of
+%person year observations in which we observe a worker, the function works
+%with a simple model in First Differences (FD). When max(T_i)>2, we work
+%with a model that combines all first differences for a given individual and
+%notice that weighted least squares estimates in this Pooled First Differences
+%(PFD) model are numerically equivalent to standard within group 
+%(Fixed Effects) estimates, provided that each difference for an individual
+%is weighted by T_i.
+
+%The code also includes a small montecarlo exercise at the end as described
+%in the empirical section of KSS.
+
+%If controls are specifiied by the user the function will work as follows:
+%After finding the largest connected set the code estimates a standard AKM
+%model with controls. Then it uses the estimated effects on these controls to 
+%partial out the effect of these variables on the outcomes. The leave-out
+%model will then work with this residualized outcome to speed up
+%computation.
+%% DESCRIPTION OF THE INPUTS
+
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%-                   
+                        %-MANDATORY INPUTS
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%-
+%y: outcome. Dimensions: N* x 1; N*= # of person-year observations.
+
+%id: worker indicators. Dimensions: N* x 1
+
+%firmid: firm indicators. Dimensions: N* x 1
+
+%leave_out_level: string variable that takes two values:
+
+            %'obs': perform leave-out by leaving a person-year observation
+            %out.
+
+            %'workers': perform leave-out by leaving an entire worker's history out.
+            
+%When leave_out_level='workers', the code automatically adjusts standard 
+%errors to account for serial correlation in the error term.
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%-                   
+                    %---NON-MANDATORY INPUTS
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- 
+%type_algorithm: 'string'
+
+%This declares which type of algorithm to perform in order to
+%compute (Bii,Pii). 
+
+%If type_algorithm='exact', then (Bii,Pii)
+%are computed using an exact method which can take quite a bit of time in 
+%large datasets. 
+
+%If type_algorithm='JL', then the code uses the Spielman and Srivastava (2008) 
+%algorithm which make use of the Johnson-Lindenstrauss lemma. 
+%See Appendix B of KSS.
+
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- 
+%controls:
+%Matrix of controls with dimensions: N* x K. This matrix of controls must
+%be appropriately defined by the user ex-ante. For instance, if the user 
+%wants to include time effects then the user should include in the matrix 
+%'controls' the set of dummy variables associated to a particular year
+%effect. If 'controls' is empty, then no controls will be used for
+%estimation.
+
+
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%-                  
+%eigen_diagno: Binary. 
+
+% If 1, the code outputs the lindeberg condition and 
+% eigenvalue ratio of theorem 1. The code will also output the 
+% weak-id confidence intervals using the AM method described in the paper 
+% Default is 0.
+
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- 
+%eigen_fast: Binary. 
+%If 1 (and eigen_diagno=1), the code uses a simulation method to estimate 
+%the sum of squared eigenvalues of the design matrix.
+%It is recommended to set eigen_fast=1 when working with large datasets.
+% Default is 0.
+
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- 
+%do_montecarlo: Binary. 
+%If 1, the code performs a MC experiment.
+% Default is 0.
+
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- 
+%restrict_movers: Binary. 
+%If 1, the code performs estimation (and weights the results) using movers
+%only.
+% Default is 0.
+
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- 
+%filename: string. 
+%Used to name saved outputs.
+%Default is 'leave_out_FD_estimates';
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%-
+
+
+%% DESCRIPTION OF THE OUTPUTS
+
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- 
+%sigma2_psi: leave-out variance of firm effects. 
+%V:sampling variance of the leave-out variance of firm effects
+
+%Check Log File for additional results reported by the code. 
+%-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%- %-%-%-
+
+no_controls=0;
+%% READ
+if nargin < 4
+error('More arguments needed');
+end
+
+if nargin == 4
+    no_controls=1;
+    controls=ones(size(y,1),1);
+    type_algorithm='JL';
+    eigen_diagno=0;
+    eigen_fast=0;
+    do_montecarlo=0;
+    restrict_movers=0;
+    filename='leave_out_FD_estimates';
+end
+
+if nargin == 5
+    type_algorithm='JL';
+    eigen_diagno=0;
+    eigen_fast=0;
+    do_montecarlo=0;
+    restrict_movers=0;
+    filename='leave_out_FD_estimates';
+end
+
+if nargin == 6
+    eigen_diagno=0;
+    eigen_fast=0;
+    do_montecarlo=0;
+    filename='leave_out_FD_estimates';
+    restrict_movers=0;
+end
+
+if nargin == 7
+    eigen_fast=0;
+    do_montecarlo=0;
+    filename='leave_out_FD_estimates';
+    restrict_movers=0;
+end
+
+if nargin == 8
+    do_montecarlo=0;
+    restrict_movers=0;
+    filename='leave_out_FD_estimates';
+end
+
+if nargin == 9
+    restrict_movers=0;
+    filename='leave_out_FD_estimates';
+end
+
+if nargin == 10
+    filename='leave_out_FD_estimates';
+end
+
+if size(controls,2)==0
+    no_controls=1;
+    controls=ones(size(y,1),1);
+end
+
+
+
+%% Identify the type of panel (T=2 or T>2).
+[~,~,id_norm]=unique(id);
+T=accumarray(id_norm,1);
+clear id_norm
+maxT=max(T);
+
+if maxT==2 % T=2.
+    type_estimator='FD';
+end
+
+if maxT>2 % General case. Will set model in PFD
+    type_estimator='FE';
+end
+
+
+if do_montecarlo==1 && strcmp(type_estimator,'FE')  
+    error('Montecarlo can be computed only for T=2 case.');
+end
+
+
+
+%Listing options
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+disp('Listing options')
+no_controls
+leave_out_level
+type_algorithm
+type_estimator
+eigen_diagno
+eigen_fast
+do_montecarlo
+restrict_movers
+filename
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+
+
+%% STEP 1: PRELIMINARIES
+%As first step in our analysis, we run estimation of a standard AKM model
+%on the original input data. 
+
+%Lagfirmid
+gcs = [NaN; id(1:end-1)];
+gcs = id~=gcs;
+lagfirmid=[NaN; firmid(1:end-1)];
+lagfirmid(gcs==1)=NaN; %%first obs for each worker
+
+%Find the connected set. Then define dimensions and relevant matrices.
+[y,id,firmid,id_old,firmid_old,controls] = connected_set(y,id,firmid,lagfirmid,controls);
+
+
+%Define
+NT=size(y,1);
+J=max(firmid);
+N=max(id);
+D=sparse(1:NT,id',1);
+F=sparse(1:NT,firmid',1);
+S=speye(J-1);
+S=[S;sparse(-zeros(1,J-1))];  %N+JxN+J-1 restriction matrix 
+if no_controls==1
+X=[D,F*S];
+end
+if no_controls==0
+X=[D,F*S,controls];
+end
+
+%Run AKM
+disp('Running AKM...')
+tic
+xx=X'*X;
+xy=X'*y;
+tic
+L=ichol(xx,struct('type','ict','droptol',1e-2,'diagcomp',.1));
+toc
+b=pcg(xx,xy,1e-10,1000,L,L');
+toc
+ahat=b(1:N);
+ghat=b(N+1:N+J-1);
+pe=D*ahat;
+fe=F*S*ghat;
+xb=X*b;
+r=y-xb;
+dof=NT-size(X,2)-1;
+TSS=sum((y-mean(y)).^2);
+R2=1-sum(r.^2)/TSS;
+adjR2=1-sum(r.^2)/TSS*(NT-1)/dof;
+
+
+%Some auxiliaries for summary statistics.
+gcs = [NaN; id(1:end-1)];
+gcs = id~=gcs;
+lagfirmid=[NaN; firmid(1:end-1)];
+lagfirmid(gcs==1)=NaN; %%first obs for each worker
+stayer=(firmid==lagfirmid);
+stayer(gcs==1)=1;
+stayer=accumarray(id,stayer);
+T=accumarray(id,1);
+stayer=T==stayer;
+movers=stayer~=1;
+movers=movers(id);
+id_movers=id(movers);
+[~,~,n]=unique(id_movers);
+Nmovers=max(n);
+
+%Run AKM
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+s=['STEP 1: AKM Estimates on Largest Connected Set '];
+disp(s);
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+s=['mean wage: ' num2str(mean(y))];
+disp(s)
+s=['variance of wage: ' num2str(var(y))];
+disp(s)
+s=['# of Movers: ' num2str(max(Nmovers))];
+disp(s);
+s=['# of Firms: ' num2str(size(F,2))];
+disp(s);
+s=['# of Person Year Observations: ' num2str(sum(diag((F'*F))))];
+disp(s);
+s=['-*-*-*-*-*-*AKM RESULTS-*-*-*-*-*-*'];
+disp(s)
+COV=cov(fe,pe);
+s=['Variance of Firm Effects: ' num2str(COV(1,1))];
+disp(s);
+s=['Covariance of Firm and Person Effects: ' num2str(COV(1,2))];
+disp(s);
+s=['Variance of Person Effects: ' num2str((COV(2,2)))];
+disp(s);
+s=['Correlation of Firm Effect and Person Effects: ' num2str((corr(fe,pe)))];
+disp(s);
+s=['R2: ' num2str(R2)];
+disp(s);
+s=['Adj.R2: ' num2str(adjR2)];
+disp(s);
+%Do some cleaning of matrices in memory
+clear xx xy L xb pe fe ahat ghat F D S Lchol
+
+
+%%Deresidualized outcome variable (allows the leave one out methodology to run faster)
+if no_controls==0
+y=y-X(:,N+J:end)*b(N+J:end);
+end
+clear X b
+
+
+%% STEP 2: LEAVE ONE OUT CONNECTED SET
+%Here we compute the leave out connected set as defined in Appendix B. 
+%The input data is represented by the largest connected set. After applying
+%the function 'pruning_unbal_v3', the output data will be a connected set
+%such that the associated bipartite graph between workers and firms remains
+%connected after removing any particular worker from the graph.
+
+
+%Focus estimation on movers only?
+if restrict_movers==1
+sel=movers;
+y=y(sel,:);
+firmid=firmid(sel,:);
+id=id(sel,:);
+id_old=id_old(sel,:);
+firmid_old=firmid_old(sel,:);
+controls=controls(sel,:);
+
+%reset ids
+[~,~,n]=unique(firmid);
+firmid=n;
+[~,~,n]=unique(id);
+id=n;
+end
+
+
+
+%Leave One Out Largest Connected Set
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+s=['Finding the leave one out largest connected set... '];
+disp(s)
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+tic
+[y,firmid,id,id_old,firmid_old,controls] = pruning_unbal_v3(y,firmid,id,id_old,firmid_old,controls);
+disp('Time to find leave one out largest connected set')
+toc
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+
+%%%Drop stayers with a single person year observation
+T=accumarray(id,1);
+T=T(id);
+sel=T>1;
+y=y(sel,:);
+firmid=firmid(sel,:);
+id=id(sel,:);
+id_old=id_old(sel,:);
+firmid_old=firmid_old(sel,:);
+controls=controls(sel,:);
+
+%Resetting ids one last time.
+[~,~,n]=unique(firmid);
+firmid=n;
+[~,~,n]=unique(id);
+id=n; 
+
+
+%Very Important Auxiliaries
+gcs = [NaN; id(1:end-1)];
+gcs = id~=gcs;
+lagfirmid=[NaN; firmid(1:end-1)];
+lagfirmid(gcs==1)=NaN; %%first obs for each worker
+stayer=(firmid==lagfirmid);
+stayer(gcs==1)=1;
+stayer=accumarray(id,stayer);
+T=accumarray(id,1);
+stayer=T==stayer;
+movers=stayer~=1;
+movers=movers(id);
+id_movers=id(movers);
+[~,~,n]=unique(id_movers);
+Nmovers=max(n);
+clear id_mover
+
+
+
+
+
+
+s=['Info on the leave one out connected set:'];
+disp(s);
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+s=['mean wage: ' num2str(mean(y))];
+disp(s)
+s=['variance of wage: ' num2str(var(y))];
+disp(s)
+s=['# of Movers: ' num2str(Nmovers)];
+disp(s);
+s=['# of Firms: ' num2str(max(firmid))];
+disp(s);
+s=['# of Person Year Observations: ' num2str(size(y,1))];
+disp(s);
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+
+%% STEP 3: RESHAPING DATA
+%If max(T_i)=2, we simply set the model in FD.
+%If max(T_i)>2, we set the model in PFD and use the appropriate weighting.
+
+NT=size(y,1);
+F=sparse(1:NT,firmid',1);
+J=size(F,2);
+count=ones(length(id),1);
+gcs = cell2mat(accumarray(id,count,[],@(x){cumsum(x)}));
+
+
+%Standard FD transformation
+if strcmp(type_estimator,'FD')
+    %outcome variable    
+    ylag=[NaN; y(1:end-1)];
+    ylag(gcs==1)=NaN; %%first obs for each worker
+    ydelta=y-ylag;
+    ydelta(isnan(ydelta(:,1)),:)=[]; %remove first observation for worker;
+
+    %matrix of assignements
+    Flag=[NaN(1,J); F(1:end-1,:)];
+    Flag(gcs==1,1)=NaN; %just put it for first firm, we'll remove rows where there is at least one NaN.
+    Fdelta=F-Flag;
+    sel=~any(isnan(Fdelta),2);
+    Fdelta=Fdelta(sel,:);
+
+    %ids
+    firmid_delta=[NaN; firmid(1:end-1)];
+    firmid_delta(gcs==1)=NaN;
+    firmid_delta=firmid_delta(sel);
+    firmid_delta_f=firmid;
+    firmid_delta_f=firmid_delta_f(sel);
+    id_movers=id(sel);
+    clear Flag ylag
+end
+
+%PD transformation
+if strcmp(type_estimator,'FE')
+    tic
+    [ydelta, Fdelta, Tweight,id_movers,firmid_delta,firmid_delta_f,gcs_delta]= stacked_Fdelta(y,id,firmid,gcs);
+    disp('Time to set up the model in Pooled Differences')
+    toc
+end
+
+%Design matrix (Laplacian) and preconditioner
+L=(Fdelta'*Fdelta); %Laplacian matrix
+pfun_ = cmg_sdd(L); %preconditioner for Laplacian matrices.
+
+%% STEP 4: DIAGNOSTICS FOR ESTIMATING THE VARIANCE OF FIRM EFFECTS
+%This part is only computed provided that the option 'eigen_diagno' is
+%turned on. In this part, we calculate the squared eigenvalue ratio and
+%Lindeberg conditions that constitute the key conditions to verify the
+%validity of Theorem 1. Lindebergc condition assumes q=1.
+
+if eigen_diagno==1
+    EIG_NORM=zeros(3,1);
+    [Q, lambda_eig] = eigs(F'*F,L,4);
+    lambda_eig=diag(lambda_eig);
+    lambda_eig=lambda_eig(2:end); %Laplacian has always first eigenvalue equal to 0.
+    lambda_1=lambda_eig(1);
+    q=Q(:,1);
+    x1bar=Fdelta*q;
+    norm=(sum(x1bar.^2))^(0.5);
+    x1bar=x1bar/norm;
+    disp('checking, must report 1')
+    sum(x1bar.^2)
+    clear Q
+    
+    if eigen_fast==0 %To calculate sum of squared eigenvalues (here using exact method)
+        Degree=(F'*F);
+        Dsqrt=sqrt(Degree);
+        Dsqrt_inv=Dsqrt^(-1);
+        normL=Dsqrt_inv*L*Dsqrt_inv;
+        EIG = eig(full(normL));
+        EIG = sort(EIG);
+        EIG=EIG(2:end); %Laplacian has always first eigenvalue equal to 0.
+        EIG=(1./EIG); %eigenvalues for the inverse.
+        EIG=EIG.^2;
+        SUM_EIG=sum(EIG);
+        clear normL Degree Dsqrt_inv Dsqrt
+            for pp=1:3
+                EIG_NORM(pp,1)=EIG(pp)/SUM_EIG;
+            end
+    end
+    
+    if eigen_fast==1 %To calculate sum of squared eigenvalues (via simulations)
+        SUM_EIG=trace_Atilde_sqr_FD(Fdelta,F,L,pfun_); 
+            for pp=1:3
+                EIG_NORM(pp,1)=(lambda_eig(pp,1)^2)/SUM_EIG;
+            end    
+    end
+    disp('Time to find Eigenvalues and Eigenvectors to compute Lindeberg')
+    toc
+end
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+%% STEP 4: IDENTIFY THE NON ZERO VALUES IN HAT MATRIX
+%The next step is probably the most abtstract, yet the most important,
+%passage of the code. Leave one out computation requires computation of the
+%(block) diagonal of the "hat" matrix, P. This is potentially a
+%gigantic matrix. Even if it is block diagonal, some computers might not be
+%able to store all its elements. However, thanks to the particular
+%structure associated with the Laplacian we know exactly which entries 
+%need to be filled in this matrix. 
+
+%If the user perfoms leave-out dropping just a person-year observation,
+%then the associated (Bii,Pii) will be a non-zero scalar if the worker
+%moved across firms in the corresponding year-year combination. 
+
+%If the user perfoms leave-out dropping the entire history of a worker,
+%then the associated (Bii,Pii) will each be a matrix as we have to keep
+%track of cross-products across year-year combinations where the worker has
+%moved across firms.
+
+tic
+if strcmp(type_estimator,'FD')
+    index=[(1:size(firmid_delta,1))']; %index of observations in the FD world
+    sel=firmid_delta~=firmid_delta_f;
+    MOVERS_INDEX=sel;
+    elist=[firmid_delta(sel) firmid_delta_f(sel) firmid_delta(sel) firmid_delta_f(sel)]; %keeping track of firm in t, firm in t' for movers. Since here T=2, no need for cross-products when doing leave-out
+    rows=index(sel);
+    column=index(sel);
+    [elist, ~, index_unique]=unique(elist,'rows');
+end
+
+if strcmp(type_estimator,'FE') && strcmp(leave_out_level,'obs') 
+    index=[(1:size(firmid_delta,1))']; %index of observations in the PFD world
+    sel=firmid_delta~=firmid_delta_f;
+    elist=[firmid_delta(sel) firmid_delta_f(sel) firmid_delta(sel) firmid_delta_f(sel)]; %keeping track of firm in t, firm in t' for movers. Since we want to leave one obs at the time, no need for cross-products when doing leave-out
+    rows=index(sel);
+    column=index(sel);
+    Tweight=Tweight(sel);
+    [elist, ~, index_unique]=unique(elist,'rows');
+end
+
+if strcmp(type_estimator,'FE') && strcmp(leave_out_level,'workers')
+    [elist,index_unique,rows,column,Tweight]= input_lambda_P_FE_fast(firmid_delta,firmid_delta_f,id_movers,Tweight); %%keeping track of firm in t, firm in t' for movers across periods for a given worker. Now we need also to keep track of cross-products because we leave want to run leave-out leaving the entire worker history of a given individual
+end
+
+disp('Time to set up the indexes of the Hat matrix')
+toc
+disp('Completed Step 4')
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+%% STEP 5: COMPUTE (Bii,Pii)
+%There are two ways to proceed. 
+
+%First way, is to compute exact estimates,
+%by parallelizing computation of S_xx^(-1)x_i' across cores.
+
+%Second way uses the SS (2011) algorithm described in Appendix B. Notice
+%that everything applies of that Appendix because we still have S_xx has a
+%Laplacian matrix in this context.
+
+%We make use of the cmg solver for both steps. The user can fix a seed for 
+%replication purposes. 
+
+
+%Inputs
+tol=1e-5; %tol for pcg
+epsilon=0.01; %rules the tol for random projection (essentially how many simulations to take).
+
+%Calculate (Bii,Pii)
+[Pii, Bii] = eff_res_FAST_FE_ONLY(elist,Fdelta,L,F,tol,epsilon,type_algorithm,pfun_);
+Pii=Pii(index_unique);
+Bii=Bii(index_unique);
+
+%need reweight differences if running FE via PD.
+if strcmp(type_estimator,'FE')
+    Pii=Pii./Tweight; 
+    Bii=Bii./Tweight;
+end
+
+%Lambda P
+Lambda_P=sparse(rows,column,Pii,size(Fdelta,1),size(Fdelta,1));
+Lambda_P=Lambda_P+triu(Lambda_P,1)'; %make it symmetric.
+%Lambda B
+Lambda_B=sparse(rows,column,Bii,size(Fdelta,1),size(Fdelta,1));
+Lambda_B=Lambda_B+triu(Lambda_B,1)'; %make it symmetric.
+disp('Completed Step 5')
+s=['-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*'];
+%save(s)
+%% STEP 6: ESTIMATION
+%Step 6A: AKM (Plug-in) estimates of the variance of firm effects.
+%Step 6B: Verify that AKM and PDF give back same answer.
+%Step 6C: Leave out with associated confidence interval (q=0 and q=1).
+
+%% STEP 6A: AKM ESTIMATION on LEAVE ONE OUT LARGEST CONNECTED SET
+S=speye(J-1);
+S=[S;sparse(-zeros(1,J-1))];  %N+JxN+J-1 restriction matrix
+D=sparse(1:NT,id',1);
+X=[D,F*S];
+xx=X'*X;
+xy=X'*y;
+Lchol=ichol(xx,struct('type','ict','droptol',1e-2,'diagcomp',.1));
+b=pcg(xx,xy,1e-10,1000,Lchol,Lchol');
+N=size(D,2);
+J=size(F,2);
+ahat=b(1:N);
+ghat=b(N+1:N+J-1);
+pe=D*ahat;
+fe=F*S*ghat;
+COV=cov(fe,pe);
+sigma_2_psi_AKM=COV(1,1);
+clear X b xx Lchol ahat ghat S 
+%% STEP 6B: VERIFY model in PFD gives back same estimates as Fixed Effects.
+xy=Fdelta'*ydelta;
+b=pcg(L,xy,1e-10,1000,pfun_);
+psi_hat_norm=b;
+disp('checking - must report 0')
+abs(var(fe)-var(F*b)) %you can also check that each single firm effect (when consistently normalized across methods) are numerically equivalent.
+r=ydelta-Fdelta*b;
+clear xy
+%% STEP 6C: LEAVE OUT ESTIMATES
+
+%Leave Out Residuals
+Ndelta=size(Fdelta,1);
+I_Lambda_P=(speye(Ndelta,Ndelta)-Lambda_P);
+L_P=ichol(I_Lambda_P,struct('type','ict','droptol',1e-2,'diagcomp',2));
+[eta_h, flag]=pcg(I_Lambda_P,r,1e-5,1000,L_P,L_P');
+
+%Auxiliary
+A_b=F'*(fe-mean(fe));
+[W_to_use, my_first_part] = construc_W_FD(ydelta,Fdelta,L,pfun_,A_b,Lambda_B,I_Lambda_P,L_P,eta_h);
+
+tic
+if nargout==1
+    sigma2_psi=leave_out_estimation_two_way_FD(ydelta,Fdelta,F,L,pfun_,sigma_2_psi_AKM,Lambda_B,Lambda_P,I_Lambda_P,L_P,eta_h,W_to_use,my_first_part);
+end
+
+if eigen_diagno == 0 && nargout==2
+    [sigma2_psi, V, sigma_predict]= leave_out_estimation_two_way_FD_task1(ydelta,Fdelta,F,L,pfun_,sigma_2_psi_AKM,Lambda_B,Lambda_P,I_Lambda_P,L_P,eta_h,W_to_use,my_first_part);
+end
+
+if eigen_diagno == 1 && nargout==2
+    [sigma2_psi, V, sigma_predict, COV_R1, gamma_sq,Fstatistic,b_1,theta_1]= leave_out_estimation_two_way_FD_task1(ydelta,Fdelta,F,L,pfun_,sigma_2_psi_AKM,Lambda_B,Lambda_P,I_Lambda_P,L_P,eta_h,W_to_use,my_first_part,x1bar,lambda_1);
+end
+disp('Time to Compute Leave Out of Firm Effects')
+toc
+
+%% STEP 7: REPORTING
+s=['Results: Leave One Out Largest Connected Set'];
+disp(s);
+s=['-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+s=['mean wage: ' num2str(mean(y))];
+disp(s)
+s=['variance of wage: ' num2str(var(y))];
+disp(s)
+s=['# of Movers: ' num2str(Nmovers)];
+disp(s);
+s=['# of Firms: ' num2str(size(F,2))];
+disp(s);
+s=['# of Person Year Observations: ' num2str(NT)];
+disp(s);
+s=['Max Leverage' num2str(max(diag(Lambda_P)))];
+disp(s);
+s=['-*-*-*-*-*-*Variance of Firm Effects-*-*-*-*-*-*'];
+disp(s)
+s=['AKM: ' num2str(sigma_2_psi_AKM)];
+disp(s)
+s=['Leave One Out: ' num2str(sigma2_psi)];
+disp(s)
+if nargout==2
+s=['Leave One Out SE: ' num2str(sqrt(V))];
+disp(s)
+end
+s=['-*-*-*-*-*-*-*-*-*-*-*-*'];
+disp(s)
+if eigen_diagno==1
+for pp=1:1
+if pp == 1
+title='Diagnostics on Variance of Firm Effects';
+end    
+if pp == 2
+title='Diagnostics on Variance of Person Effects';
+end
+if pp == 3
+title='Diagnostics on CoVariance of Person, Firm Effects';
+end
+s=['*********************' title '*********************'];
+disp(s);
+s=['ratio of eigenvalues: '];
+disp(s)
+EIG_NORM(1:3,pp)
+s=['Weak Lindeberg Condition: ' num2str(max(x1bar.^2))];
+disp(s)
+s=['Sum of squared eigenvalues: ' num2str(SUM_EIG/NT^2)];
+disp(s)
+s=['Variance of b_1:  ' num2str(COV_R1(1,1))];
+disp(s);
+s=['Variance of theta_1: ' num2str(COV_R1(2,2))];
+disp(s);
+s=['Covariance of (b_1,theta_1): ' num2str(COV_R1(1,2))];
+disp(s);
+s=['Correlation of (b_1,theta_1): ' num2str((COV_R1(1,2))/(sqrt(COV_R1(2,2))*sqrt(COV_R1(1,1))))];
+disp(s);
+s=['gamma squared: ' num2str(gamma_sq)];
+disp(s);
+s=['Fstatistic: ' num2str(Fstatistic)];
+disp(s);
+end
+end
+s=['******************************************'];
+disp(s);
+%% Focus on Inference
+if nargout==2
+for pp=1:1
+if pp == 1
+title='Inference on Variance of Firm Effects';
+end    
+if pp == 2
+title='Inference on Variance of Person Effects';
+end
+if pp == 3
+title='Inference on CoVariance of Person, Firm Effects';
+end
+s=['*********************' title '*********************'];
+disp(s);
+s=['SE under q=0: ' num2str(sqrt(V))];
+disp(s);
+s=['CI under q=0: ' num2str(sigma2_psi-1.96*sqrt(V)) '  '  '  ' num2str(sigma2_psi+1.96*sqrt(V))];
+disp(s);   
+if eigen_diagno==1
+[UB,LB,C]=AM_CI(NT,lambda_1,gamma_sq,COV_R1,b_1,theta_1);
+s=['CI under q=1: ' num2str(LB) '  '  '  ' num2str(UB)];
+disp(s); 
+s=['Curvature: ' num2str(C)];
+disp(s); 
+s=['******************************************'];
+disp(s); 
+end
+end
+end
+
+%Save File.
+s=[filename '_FD'];
+save(s)
+
+
+
+Pii=diag(Lambda_P);
+mean(Pii>0.5)
+Pii=Pii(MOVERS_INDEX);
+mean(Pii>0.5)
+%prova
+tic
+C 		= brute_force_C(Fdelta,F);
+%save('C')
+%load('C')
+%C		= sprand(size(Fdelta,1),size(Fdelta,1),0.001);
+disp('Time to brute force C')
+toc
+[TAU TOTAL SUBTRACT_CO_MOVERS SUBTRACT_BAD SUBTRACT_GOOD SUM_CO_MOVERS SUM_BAD SUM_GOOD]=paths_network(firmid,id,id_movers,firmid_delta,firmid_delta_f,ydelta,eta_h,Pii,L,pfun_,Fdelta,I_Lambda_P,L_P,Lambda_B,F,C);
+
+BAD_ESTIMATOR1 = TOTAL - SUBTRACT_CO_MOVERS + SUM_CO_MOVERS  - SUBTRACT_GOOD + SUM_GOOD - SUBTRACT_BAD
+TAU 		   = TOTAL - SUBTRACT_CO_MOVERS - SUBTRACT_BAD - SUBTRACT_GOOD + SUM_GOOD + SUM_BAD + SUM_CO_MOVERS;
+
+
+
+(TAU-BAD_ESTIMATOR1)/TAU
+
+
+
+save('AA')
+
+if 0 == 1 
+
+%Create the heteroskedastic variances
+sigma_s = ydelta.*eta_h;
+sigma_s = abs(sigma_s);
+sigma_s	= diag(sigma_s);
+
+%Store the matrix C
+
+target  = trace(sigma_s*C*sigma_s*C)
+
+sigma_s = diag(sigma_s);
+
+%New part on inference
+NSIM = 1000;
+SE	 = zeros(NSIM,1);
+parfor s = 1:NSIM
+	ydelta = Fdelta*psi_hat_norm+sqrt(sigma_s).*randn(size(Fdelta,1),1);
+	SE(s)  = paths_network(firmid,id,id_movers,firmid_delta,firmid_delta_f,ydelta,eta_h,Pii,L,pfun_,Fdelta,I_Lambda_P,L_P,Lambda_B,F,C);
+	s
+end
+mean(SE)
+(mean(SE)-target)/mean(SE)
+(mean(SE)-target)/target
+end
+
+end
+
